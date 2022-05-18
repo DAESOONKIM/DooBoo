@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dooboo.dao.dbBoardCommentMapper">
+<select id="count" parameterType="int" resultType="int">
+	SELECT count(*)
+	 FROM DB_COMMENT
+	 WHERE bno = #{bno}
+</select>
+<insert id="insert" parameterType="DB_Board_CommentDTO">
+	<!-- DB에서 시퀀스를 가져옴 -->
+	<selectKey keyProperty="cno" resultType="int" order="BEFORE">
+		SELECT db_comment_seq.nextval From DUAL
+	</selectKey>
+
+	INSERT INTO DB_COMMENT
+			(cno
+			,bno
+			,pcno
+			,co_mment
+			,commenter
+			,reg_date
+			,up_date
+			)	
+		  VALUES( 
+				 #{cno}
+				,#{bno}
+				,#{pcno}
+				,#{co_mment} 
+				,#{commenter}
+				,sysdate
+				,sysdate
+				)
+</insert>
+<select id="selectAll" parameterType="map" resultType="DB_Board_CommentDTO">
+	    SELECT *
+		FROM(SELECT A.*, Rownum AS Rnum
+			  FROM(SELECT cno
+			        	  ,bno
+			        	  ,NVL(pcno, cno) as pcno
+			        	  ,co_mment
+			        	  ,commenter
+			        	  ,reg_date
+			        	  ,up_date
+					FROM DB_COMMENT
+					WHERE bno = #{bno}
+					ORDER BY pcno ASC, cno ASC)A
+			 )	
+		WHERE  Rnum between #{startRow} and #{endRow} 	
+</select>
+<delete id="delete" parameterType="map"> 
+	DELETE FROM DB_COMMENT
+		  WHERE cno = #{cno}
+</delete>
+<update id="update" parameterType="DB_Board_CommentDTO">
+	UPDATE DB_COMMENT
+	   SET co_mment = #{co_mment}
+		  ,up_date = sysdate
+     WHERE cno = #{cno} 	  
+</update>
+
+</mapper>        

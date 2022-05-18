@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- oracle Null 처리 -->
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>   
+	<typeAliases>
+		<typeAlias alias="DB_BoardDTO" type="com.spring.dooboo.domain.DB_BoardDTO"/>
+		<typeAlias alias="SearchCondition" type="com.spring.dooboo.domain.SearchCondition"/>
+		<typeAlias alias="DB_PhotoDTO" type="com.spring.dooboo.domain.DB_PhotoDTO"/>
+	    <typeAlias alias="DB_Board_CommentDTO" type="com.spring.dooboo.domain.DB_Board_CommentDTO"/>
+	</typeAliases>
+</configuration>

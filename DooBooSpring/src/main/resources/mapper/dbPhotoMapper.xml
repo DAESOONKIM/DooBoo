@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dooboo.dao.dbPhotoMapper"> 
+	<select id="count" resultType="int">
+		SELECT count(*)
+		FROM DB_PHOTO
+	</select>
+	<select id = "selectAllPhoto" parameterType="SearchCondition" resultType="DB_PhotoDTO">
+		SELECT *
+		  FROM (SELECT A.*, Rownum AS Rnum
+				FROM DB_PHOTO A
+			  )
+		WHERE Rnum between #{startRow} and #{endRow}
+	</select>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>        
