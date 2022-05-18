@@ -24,7 +24,7 @@ public class DB_Board_CommentController {
 	@Autowired
 	DB_Board_CommentService service;
 	
-	//댓글을 등록하는 메서드 
+	//댓글을 등록하는 메서드  
 	@PostMapping("/comments")
 	public ResponseEntity<String>writeComment(@RequestBody DB_Board_CommentDTO dto, Integer bno, HttpSession session){
 		String commenter = (String) session.getAttribute("id");
