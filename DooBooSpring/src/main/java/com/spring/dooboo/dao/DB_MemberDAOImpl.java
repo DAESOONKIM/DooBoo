@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.dooboo.domain.DB_MemberDTO;
 
+
 @Repository
 public class DB_MemberDAOImpl implements DB_MemberDAO {
 	
@@ -117,6 +118,31 @@ public class DB_MemberDAOImpl implements DB_MemberDAO {
 		
 		return count;
 	}
-	
+
+	@Override
+	public int updateMember(DB_MemberDTO dto) throws Exception {
+		String sql = "update DB_MEMBER set email = ?, name = ?, phone = ?"
+					+ ", address = ?, zonecode = ?, addressdetail = ?  where id = ?";	
+					 
+		int count = 0;
+		
+		try {
+			 Connection conn = ds.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, dto.getEmail());
+	         pstmt.setString(2, dto.getName());
+	         pstmt.setString(3, dto.getPhone());
+	         pstmt.setString(4, dto.getAddress());
+	         pstmt.setString(5, dto.getZonecode());
+	         pstmt.setString(6, dto.getAddressdetail());
+	         pstmt.setString(7, dto.getId());
+			
+	         count = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 
 }
