@@ -26,7 +26,7 @@ import com.spring.dooboo.service.DB_Board_CommentService;
 
 @Controller
 @RequestMapping("/board")
-public class DB_BoardController {
+public class DB_BoardController { 
 	 
 	@Autowired
 	DB_BoardService service;
