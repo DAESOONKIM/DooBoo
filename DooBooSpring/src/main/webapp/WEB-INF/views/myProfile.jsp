@@ -86,6 +86,9 @@
 <body>
 	<script>
 		let joinMsg = "${joinMsg}";
+		let validateMsg = "${validateMsg}";
+   	 	if(validateMsg == "success") alert("회원정보 수정이 완료 되었습니다.");
+   	 	if(validateMsg == "fail") alert("회원정보 수정에 실패 하였습니다.");
 		if (joinMsg == "fail") 		alert("회원가입에 실패하였습니다.");
 		if (joinMsg == "passErr") 	alert("비밀번호가 틀립니다. 다시 입력해 주세요.");
 	</script>
@@ -119,7 +122,7 @@
 	<!-- 회원가입 Main Page -->
 
 	<form id="contactForm" data-sb-form-api-token="API_TOKEN"
-		action="/login/updateMyProfile" method="post">
+		action="/login/profileForm" method="post">
 		<main class="flex-shrink-0">
 			<section class="py-5">
 				<div class="container px-5">
@@ -150,27 +153,20 @@
 										type="password" placeholder="Enter your message here..."
 										data-sb-validations="required" onkeydown="checkSpacebar()"/> <label for="content">Password</label>
 								</div>
-								<!-- password check input-->
-								<div class="form-floating mb-3">
-									<input class="form-control" id="password_ck" name="password_ck"
-										type="password" placeholder="Enter your message here..."
-										data-sb-validations="required" onkeydown="checkSpacebar()"/> <label for="content">Password
-										Check</label>
-								</div>
 								<i id="msg_chkPass" class="fa fa-exclamation-circle"></i>
 							</c:if>
 								<!-- name input-->
 								<div class="form-floating mb-3">
 									<input class="form-control" id="name" name="name"
 										type="text" placeholder="Enter your message here..."
-										data-sb-validations="required" onkeydown="checkSpacebar()" value="${member.name}" readOnly="true"/> <label for="name">Name</label>
+										data-sb-validations="required" onkeydown="checkSpacebar()" value="${member.name}" ${mode=="modify" ? "" : "readonly='readonly'"}/> <label for="name">Name</label>
 								</div>
 								<i id="msg_chkName" class="fa fa-exclamation-circle"></i>
 								<!-- number input-->
 								<div class="form-floating mb-3">
 									<input class="form-control" id="phone" name="phone"
 										type="tel" placeholder="Enter your message here..."
-										data-sb-validations="required" maxlength="11" value="${member.phone}" readOnly="true"/> <label for="phone">Phone</label>
+										data-sb-validations="required" maxlength="11" value="${member.phone}" ${mode=="modify" ? "" : "readonly='readonly'"}/> <label for="phone">Phone</label>
 								</div>
 								<i id="msg_chkPhone" class="fa fa-exclamation-circle"></i>
 								<!-- e-mail input-->
@@ -282,15 +278,6 @@
 	
 	<script>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 		function checkSpacebar(){
 			var kcode = event.keyCode;
 			if(kcode == 32) event.returnValue = false;
@@ -363,9 +350,9 @@
 					
 				
 				var password = $('#password').val();
-				var password_ck = $('#password_ck').val();					
+				var password_ck = '${member.password}';					
 				
-				if(password == "" || password_ck == "" ){
+				if(password == ""){
 					$('#msg_chkPass').html("* 패스워드를 입력해주세요.");
 					return false;
 				}
@@ -424,7 +411,8 @@
 					
 				}); // function 종료(sub)
 				
-				let mode = '${mode}';
+			let mode = '${mode}';
+			
 			if(mode == "modify"){
 				window.onload = function(){
 				    document.getElementById("address_chk").addEventListener("click", function(){ // 주소검색 버튼 클릭시

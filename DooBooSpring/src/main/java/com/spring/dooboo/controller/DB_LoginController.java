@@ -93,6 +93,29 @@ public class DB_LoginController {
 		return "passwordUpdateForm";
 	}
 	
+	@PostMapping("/profileForm")
+	public String myProfileUpdate(DB_MemberDTO dto ,RedirectAttributes rattr) {
+		
+		int count = 1;
+		
+		try {
+			
+			int result = dao.updateMember(dto);
+			if(count == result) {
+				rattr.addFlashAttribute("validateMsg","success");
+				return "redirect:/login/profile";
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 rattr.addFlashAttribute("validateMsg","fail");
+		 return "redirect:/login/profile";
+		
+	}
+	
+	
 	
 	
 	
