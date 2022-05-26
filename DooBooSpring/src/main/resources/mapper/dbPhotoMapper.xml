@@ -13,30 +13,35 @@
 			  )
 		WHERE Rnum between #{startRow} and #{endRow}
 	</select>
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<select id="retrieveRecRslt"  parameterType="String" resultType="DB_PhotoJoinRecDTO">
+		SELECT a.no as no
+			  ,b.photonum as photonum
+			  ,b.recommender as recommender
+			  ,b.recyn as recyn
+		  FROM DB_PHOTO a 
+		       JOIN DB_REC b
+		         ON a.no = b.photonum
+		  WHERE b.recommender = #{recommender}   
+		    AND b.recyn = 1
+	</select>
+	<select id="retrieveRecRsltN"  parameterType="String" resultType="DB_PhotoJoinRecDTO">
+		SELECT a.no as no
+			  ,b.photonum as photonum
+			  ,b.recommender as recommender
+			  ,b.recyn as recyn
+		  FROM DB_PHOTO a 
+		       JOIN DB_REC b
+		         ON a.no = b.photonum
+		  WHERE b.recommender = #{recommender}   
+		    AND b.recyn = 0
+	</select>
+	<select id="retrieveNoRecPhotonum"  parameterType="String" resultType="DB_PhotoDTO">
+		SELECT * 
+		  FROM DB_PHOTO
+		 WHERE no NOT IN(
+						 SELECT photonum 
+						   FROM DB_REC
+						  WHERE recommender = #{recommender}   		 
+		 				)
+	</select>
 </mapper>        

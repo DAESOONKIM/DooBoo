@@ -13,5 +13,8 @@
 		<typeAlias alias="SearchCondition" type="com.spring.dooboo.domain.SearchCondition"/>
 		<typeAlias alias="DB_PhotoDTO" type="com.spring.dooboo.domain.DB_PhotoDTO"/>
 	    <typeAlias alias="DB_Board_CommentDTO" type="com.spring.dooboo.domain.DB_Board_CommentDTO"/>
+	    <typeAlias alias="DB_RecDTO" type="com.spring.dooboo.domain.DB_RecDTO"/>
+	    <typeAlias alias="DB_PhotoJoinRecDTO" type="com.spring.dooboo.domain.DB_PhotoJoinRecDTO"/>
+	    
 	</typeAliases>
 </configuration>

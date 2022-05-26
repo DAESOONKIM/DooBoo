@@ -15,7 +15,14 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     </head>
+    <style>
+ .recImg >h2 > Img{
+		width : 25px;
+		height : 25px;     
+     }
+    </style>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
             <!-- Navigation-->
@@ -68,9 +75,28 @@
 		                    <div class="row gx-5 align-items-center">
 		                        <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="/img/${bean.photo}" alt="..." /></div>
 		                        <div class="col-lg-6">
-		                            <h2 class="fw-bolder">Our founding</h2>
+		                        	<div class="recImg">
+		                            <h2 class="fw-bolder">Our founding 
+		                           			 <c:forEach var="noRecRslt" items="${photonum}"> 
+													<c:if test="${bean.no eq noRecRslt.no}">
+														<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/>
+													</c:if>		
+											</c:forEach>
+											<c:forEach var="recRslt" items="${rec}"> 
+													<c:if test="${bean.no eq recRslt.no and recRslt.recyn eq 1}">
+															<img id="recImg${bean.no}" src="/img/fullheart.png" photono="${bean.no}"/>
+													</c:if>
+											</c:forEach>	
+											<c:forEach var="recRsltN" items="${rec2}"> 
+													<c:if test="${bean.no eq recRsltN.no and recRsltN.recyn eq 0}">
+															<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/>
+													</c:if>
+											</c:forEach>		
+											
+		                            </h2>
+		                            </div>
 		                            <p class="lead fw-normal text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque quisquam.</p>
-		                        </div>
+		                        </div> 
 		                    </div>
 		                </div>
 		            </section>
@@ -83,7 +109,25 @@
 		                    <div class="row gx-5 align-items-center">
 		                        <div class="col-lg-6 order-first order-lg-last"><img class="img-fluid rounded mb-5 mb-lg-0" src="/img/${bean.photo}" alt="..."/></div>
 		                        <div class="col-lg-6">
-		                            <h2 class="fw-bolder">Growth &amp; beyond</h2>
+		                        	<div class="recImg">
+		                            <h2 class="fw-bolder">Growth &amp; beyond 
+		                            	 <c:forEach var="noRecRslt" items="${photonum}"> 
+													<c:if test="${bean.no eq noRecRslt.no}">
+														<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/>
+													</c:if>		
+											</c:forEach>
+											<c:forEach var="recRslt" items="${rec}"> 
+													<c:if test="${bean.no eq recRslt.no and recRslt.recyn eq 1}">
+															<img id="recImg${bean.no}" src="/img/fullheart.png" photono="${bean.no}"/>
+													</c:if>
+											</c:forEach>	
+											<c:forEach var="recRsltN" items="${rec2}"> 
+													<c:if test="${bean.no eq recRsltN.no and recRsltN.recyn eq 0}">
+															<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/>
+													</c:if>
+											</c:forEach>		
+		                            </h2>
+		                            </div>	
 		                            <p class="lead fw-normal text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque quisquam.</p>
 		                        </div>
 		                    </div>
@@ -142,5 +186,34 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>
+    	<script>
+    	 $(document).ready(function(){
+    	 			//추천 기능 
+    		 	$(".recImg").click(function(e){
+    	 			let target = e.target;
+    	 			let recImgId = '#';
+    	 			recImgId += target.getAttribute("id");
+    	 			photonum = $(recImgId+'').attr("photono");
+    	 			$.ajax({
+    	 				type : "POST", 
+    	 				 url : "/rec",
+    	 			 headers : { "content-type": "application/json"}, // 요청 헤더 
+    	 			    data : JSON.stringify({photonum:photonum}),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
+    	 			 success : function(result){
+    	 					if(result == 1){
+    	 						$(recImgId+'').attr("src","/img/fullheart.png");
+    	 						alert("추천 감사합니다.");
+    	 					}else{
+    	 						$(recImgId+'').attr("src","/img/emptyheart.png");
+    	 						alert("추천이 취소 되었습니다.");
+    	 					}
+    	 			 },
+    	 			   error : function(){alert("error")} // 에러가 발생했을 때, 호출될 함수
+    	 			}); // $.ajax
+    	 		}); 
+           		 
+    	 });	 
+    	
+    	</script>
     </body>
 </html>
