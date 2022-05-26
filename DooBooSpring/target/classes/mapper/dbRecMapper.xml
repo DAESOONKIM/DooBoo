@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.dooboo.dao.dbRecMapper">
+	<insert id="insertRec" parameterType="DB_RecDTO">
+		INSERT INTO DB_REC
+				(photonum
+				,recommender
+				,recyn
+				)
+				values(
+						#{photonum}
+					   ,#{recommender}	
+					   ,#{recyn}	
+						)		
+	</insert>
+	
+	<update id="updateRec" parameterType="DB_RecDTO">
+		UPDATE DB_REC
+		   SET recyn = #{recyn}	
+		 WHERE photonum = #{photonum}
+		   AND recommender = #{recommender}	
+	</update>
+	<select id="retrieveCount" parameterType="DB_RecDTO" resultType="int">
+		SELECT count(recyn)
+		  FROM DB_REC
+		  WHERE photonum = #{photonum}
+		   AND recommender = #{recommender}	
+	
+	</select>
+	<select id="retrieveRecYn" parameterType="DB_RecDTO" resultType="int">
+		SELECT recyn
+		  FROM DB_REC
+		  WHERE photonum = #{photonum}
+		   AND recommender = #{recommender}	
+	</select>
+</mapper>        
+        
