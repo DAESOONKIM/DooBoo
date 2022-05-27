@@ -30,8 +30,6 @@ public class DB_PhotoController {
 	}
 
 
-
-
 	@GetMapping("/photo")
 	public String dbPhoto(Model m, SearchCondition sc, HttpSession session) {
 		String id = (String)session.getAttribute("id");
@@ -49,11 +47,10 @@ public class DB_PhotoController {
 			m.addAttribute("v",dto);
 			m.addAttribute("ph", pageHandler);
 			
-			List<DB_PhotoJoinRecDTO> photoJoinRecDTOList = service.retrieveRecRslt(id); 
+			List<DB_PhotoJoinRecDTO> photoJoinRecDTOList = service.retrieveRecRslt(id); //로그인 한 아이디가 한번이라도 추천을 했으면 추천을 했는지 안했는지 조회 
 			m.addAttribute("rec",photoJoinRecDTOList);
-			List<DB_PhotoJoinRecDTO> photoJoinRecDTOList2 = service.retrieveRecRsltN(id); 
-			m.addAttribute("rec2",photoJoinRecDTOList2);
-			List<DB_PhotoDTO> dto2 = service.retrieveNoRecPhotonum(id);
+		
+			List<DB_PhotoDTO> dto2 = service.retrieveNoRecPhotonum(id); // 로그인 되어진 아이디가 추천을 한번도 안한 사진에 대해 조회 
 			m.addAttribute("photonum",dto2);
 			
 			

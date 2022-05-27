@@ -22,18 +22,6 @@
 		       JOIN DB_REC b
 		         ON a.no = b.photonum
 		  WHERE b.recommender = #{recommender}   
-		    AND b.recyn = 1
-	</select>
-	<select id="retrieveRecRsltN"  parameterType="String" resultType="DB_PhotoJoinRecDTO">
-		SELECT a.no as no
-			  ,b.photonum as photonum
-			  ,b.recommender as recommender
-			  ,b.recyn as recyn
-		  FROM DB_PHOTO a 
-		       JOIN DB_REC b
-		         ON a.no = b.photonum
-		  WHERE b.recommender = #{recommender}   
-		    AND b.recyn = 0
 	</select>
 	<select id="retrieveNoRecPhotonum"  parameterType="String" resultType="DB_PhotoDTO">
 		SELECT * 
@@ -44,4 +32,14 @@
 						  WHERE recommender = #{recommender}   		 
 		 				)
 	</select>
+	<update id="updateAllRecPlus" parameterType="int">
+		UPDATE DB_PHOTO
+		  SET rec_count = rec_count + 1
+		WHERE no = #{photonum}   
+	</update>
+	<update id="updateAllRecMinus" parameterType="int">
+		UPDATE DB_PHOTO
+		  SET rec_count = rec_count - 1
+		WHERE no = #{photonum}   
+	</update>
 </mapper>        

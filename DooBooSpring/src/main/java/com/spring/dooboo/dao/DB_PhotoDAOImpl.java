@@ -13,7 +13,7 @@ import com.spring.dooboo.domain.SearchCondition;
 @Repository
 public class DB_PhotoDAOImpl implements DB_PhotoDAO {
 	
-	@Autowired 
+	@Autowired  
 	private SqlSession session;
 	private static String namespace = "com.spring.dooboo.dao.dbPhotoMapper.";
 	
@@ -33,13 +33,18 @@ public class DB_PhotoDAOImpl implements DB_PhotoDAO {
 	}
 
 	@Override
-	public List<DB_PhotoJoinRecDTO> retrieveRecRsltN(String id) throws Exception {
-		return session.selectList(namespace+"retrieveRecRsltN", id);
+	public List<DB_PhotoDTO> retrieveNoRecPhotonum(String id) throws Exception {
+		return session.selectList(namespace+"retrieveNoRecPhotonum", id);
 	}
 
 	@Override
-	public List<DB_PhotoDTO> retrieveNoRecPhotonum(String id) throws Exception {
-		return session.selectList(namespace+"retrieveNoRecPhotonum", id);
+	public int updateAllRecPlus(int photonum) throws Exception {
+		return session.update(namespace+"updateAllRecPlus", photonum);
+	}
+
+	@Override
+	public int updateAllRecMinus(int photonum) throws Exception {
+		return session.update(namespace+"updateAllRecMinus", photonum);
 	}
 
 }
