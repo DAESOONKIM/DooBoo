@@ -14,8 +14,10 @@ public interface DB_PhotoDAO {
 	
 	List<DB_PhotoJoinRecDTO> retrieveRecRslt(String id) throws Exception;
 	
-	List<DB_PhotoJoinRecDTO> retrieveRecRsltN(String id) throws Exception;
-	
 	List<DB_PhotoDTO> retrieveNoRecPhotonum(String id) throws  Exception;
+	
+	int updateAllRecPlus(int photonum) throws Exception;  
+	
+	int updateAllRecMinus(int photonum) throws Exception;  
 
 }

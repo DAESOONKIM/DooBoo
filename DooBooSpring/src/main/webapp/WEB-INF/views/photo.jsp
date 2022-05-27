@@ -22,6 +22,10 @@
 		width : 25px;
 		height : 25px;     
      }
+.rec_cnt{
+ font-size : 10px;
+
+}
     </style>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
@@ -77,22 +81,21 @@
 		                        <div class="col-lg-6">
 		                        	<div class="recImg">
 		                            <h2 class="fw-bolder">Our founding 
+		                            	<c:if test="${id != null}">
 		                           			 <c:forEach var="noRecRslt" items="${photonum}"> 
 													<c:if test="${bean.no eq noRecRslt.no}">
-														<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/>
+														<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/><span class="rec_cnt" id="rec_cnt${bean.no}">${bean.rec_count}</span>
 													</c:if>		
 											</c:forEach>
 											<c:forEach var="recRslt" items="${rec}"> 
 													<c:if test="${bean.no eq recRslt.no and recRslt.recyn eq 1}">
-															<img id="recImg${bean.no}" src="/img/fullheart.png" photono="${bean.no}"/>
-													</c:if>
-											</c:forEach>	
-											<c:forEach var="recRsltN" items="${rec2}"> 
-													<c:if test="${bean.no eq recRsltN.no and recRsltN.recyn eq 0}">
-															<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/>
+															<img id="recImg${bean.no}" src="/img/fullheart.png" photono="${bean.no}"/><span class="rec_cnt" id="rec_cnt${bean.no}">${bean.rec_count}</span>
+													</c:if>	
+													<c:if test="${bean.no eq recRslt.no and recRslt.recyn eq 0}">
+															<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/><span class="rec_cnt" id="rec_cnt${bean.no}">${bean.rec_count}</span>
 													</c:if>
 											</c:forEach>		
-											
+										</c:if>	
 		                            </h2>
 		                            </div>
 		                            <p class="lead fw-normal text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque quisquam.</p>
@@ -111,21 +114,21 @@
 		                        <div class="col-lg-6">
 		                        	<div class="recImg">
 		                            <h2 class="fw-bolder">Growth &amp; beyond 
-		                            	 <c:forEach var="noRecRslt" items="${photonum}"> 
+		                            	<c:if test="${id != null}">   
+		                            	   <c:forEach var="noRecRslt" items="${photonum}"> 
 													<c:if test="${bean.no eq noRecRslt.no}">
-														<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/>
+														<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/><span class="rec_cnt" id="rec_cnt${bean.no}">${bean.rec_count}</span>
 													</c:if>		
 											</c:forEach>
 											<c:forEach var="recRslt" items="${rec}"> 
 													<c:if test="${bean.no eq recRslt.no and recRslt.recyn eq 1}">
-															<img id="recImg${bean.no}" src="/img/fullheart.png" photono="${bean.no}"/>
+															<img id="recImg${bean.no}" src="/img/fullheart.png" photono="${bean.no}"/><span class="rec_cnt" id="rec_cnt${bean.no}">${bean.rec_count}</span>
 													</c:if>
-											</c:forEach>	
-											<c:forEach var="recRsltN" items="${rec2}"> 
-													<c:if test="${bean.no eq recRsltN.no and recRsltN.recyn eq 0}">
-															<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/>
+													<c:if test="${bean.no eq recRslt.no and recRslt.recyn eq 0}">
+															<img id="recImg${bean.no}" src="/img/emptyheart.png" photono="${bean.no}"/><span class="rec_cnt" id="rec_cnt${bean.no}">${bean.rec_count}</span>
 													</c:if>
 											</c:forEach>		
+		                           		</c:if>	
 		                            </h2>
 		                            </div>	
 		                            <p class="lead fw-normal text-muted mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto est, ut esse a labore aliquam beatae expedita. Blanditiis impedit numquam libero molestiae et fugit cupiditate, quibusdam expedita, maiores eaque quisquam.</p>
@@ -194,6 +197,8 @@
     	 			let recImgId = '#';
     	 			recImgId += target.getAttribute("id");
     	 			photonum = $(recImgId+'').attr("photono");
+    	 			let rec_cnt = '#rec_cnt'+photonum;
+    	 			
     	 			$.ajax({
     	 				type : "POST", 
     	 				 url : "/rec",
@@ -202,9 +207,11 @@
     	 			 success : function(result){
     	 					if(result == 1){
     	 						$(recImgId+'').attr("src","/img/fullheart.png");
+    	 						$(rec_cnt+'').text(Number($(rec_cnt+'').text())+1) //형변환 후 + 1
     	 						alert("추천 감사합니다.");
     	 					}else{
     	 						$(recImgId+'').attr("src","/img/emptyheart.png");
+    	 						$(rec_cnt+'').text(Number($(rec_cnt+'').text())-1)
     	 						alert("추천이 취소 되었습니다.");
     	 					}
     	 			 },

@@ -34,16 +34,21 @@ public class DB_PhotoServiceImpl implements DB_PhotoService {
 		return dao.retrieveRecRslt(id);
 	}
 
-
 	@Override
-	public List<DB_PhotoJoinRecDTO> retrieveRecRsltN(String id) throws Exception {
-		return dao.retrieveRecRsltN(id);
+	public List<DB_PhotoDTO> retrieveNoRecPhotonum(String id) throws Exception {
+		return dao.retrieveNoRecPhotonum(id);
 	}
 
 
 	@Override
-	public List<DB_PhotoDTO> retrieveNoRecPhotonum(String id) throws Exception {
-		return dao.retrieveNoRecPhotonum(id);
+	public int updateAllRecPlus(int photonum) throws Exception {
+		return dao.updateAllRecPlus(photonum);
+	}
+
+
+	@Override
+	public int updateAllRecMinus(int photonum) throws Exception {
+		return dao.updateAllRecMinus(photonum);
 	}
 
 }

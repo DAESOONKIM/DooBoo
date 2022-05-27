@@ -5,6 +5,7 @@ public class DB_PhotoDTO {
 	private int no;
 	private String photo;
 	private String uploaddate;
+	private int rec_count;
 	
 	
 	
@@ -25,6 +26,12 @@ public class DB_PhotoDTO {
 	}
 	public void setUploaddate(String uploaddate) {
 		this.uploaddate = uploaddate;
+	}
+	public int getRec_count() {
+		return rec_count;
+	}
+	public void setRec_count(int rec_count) {
+		this.rec_count = rec_count;
 	}
 
 
