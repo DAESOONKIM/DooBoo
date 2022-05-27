@@ -60,8 +60,8 @@ if(msg=="MAIL_SUCCESS")  alert("성공적으로 메일이 발송되었습니다.
 				<!-- Contact form-->
 				<form id="contactForm" data-sb-form-api-token="API_TOKEN"
 					action="/mail" method="post">
-					<input type="hidden" name="to" value="gpdlqnd@gmail.com"> <input
-						type="hidden" name="from" value="gpdlqnd@gmail.com">
+					<input type="hidden" name="to" value="gpdlqnd@gmail.com"> 
+					<input type="hidden" name="from" value="gpdlqnd@gmail.com">
 					<div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
 						<div class="text-center mb-5">
 							<div
