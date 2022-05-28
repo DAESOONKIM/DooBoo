@@ -24,8 +24,56 @@
      }
 .rec_cnt{
  font-size : 10px;
-
 }
+.doobooImg{
+	width : 300px;
+	height: 300px;   
+	border-radius: 7px;  
+}
+.modal {
+	display: none;
+	z-index: 500;
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal button {
+	position: absolute;
+	top: 3rem;
+	right: 3rem;
+	background: transparent;
+	border: 0;
+	color: #ffffff;
+	font-size: 3rem;
+}
+
+.modalBox {
+	position: relative;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -20%);
+	background-color: #ffffff;
+	width: 30%;
+	height: 30%;
+	text-align: center;
+}
+
+.modalBox img {
+	width: 100%;
+}
+
+.modalBox p {
+	color: #ffffff;
+	background-color: #000;
+	font-size: 2rem;
+	padding: .2rem;
+}
+
+
     </style>
     <body class="d-flex flex-column">
         <main class="flex-shrink-0">
@@ -77,7 +125,7 @@
 		            <section class="py-5 bg-light" id="scroll-target">
 		                <div class="container px-5 my-5">
 		                    <div class="row gx-5 align-items-center">
-		                        <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="/img/${bean.photo}" alt="..." /></div>
+		                        <div class="col-lg-6"><img class="doobooImg" id="doobooImg" src="/img/${bean.photo}" alt="..." /></div>
 		                        <div class="col-lg-6">
 		                        	<div class="recImg">
 		                            <h2 class="fw-bolder">Our founding 
@@ -110,7 +158,7 @@
 		            <section class="py-5">
 		                <div class="container px-5 my-5">
 		                    <div class="row gx-5 align-items-center">
-		                        <div class="col-lg-6 order-first order-lg-last"><img class="img-fluid rounded mb-5 mb-lg-0" src="/img/${bean.photo}" alt="..."/></div>
+		                        <div class="col-lg-6 order-first order-lg-last"><img class="doobooImg" id="doobooImg" src="/img/${bean.photo}" alt="..."/></div>
 		                        <div class="col-lg-6">
 		                        	<div class="recImg">
 		                            <h2 class="fw-bolder">Growth &amp; beyond 
@@ -138,6 +186,14 @@
 		            </section>
           	 	 </c:if>
          </c:forEach>
+          <!--  이미지 Modal창으로 팝업 -->
+         <div class="modal">
+			<button>&times;</button>
+			<div class="modalBox">
+				<img src="" alt="">
+			</div>
+		</div>
+		<!-- 페이징 기능-->
          <div class="paging-container">
       <div class="paging">
         <ul class="pagination pagination-lg justify-content-center">
@@ -218,6 +274,29 @@
     	 			   error : function(){alert("error")} // 에러가 발생했을 때, 호출될 함수
     	 			}); // $.ajax
     	 		}); 
+    	 			
+    	 			
+    	 		//이미지 모달창
+    	 		$(".doobooImg").click(function(){
+    	 			
+    	 			$(".modal").show();
+    	 			var imgSrc = $(this).attr("src");
+    	 			$(".modalBox img").attr("src", imgSrc);
+    	 		
+    	 		});
+    	 		$(".modal button").click(function(){   // X버튼 클릭시 모달창 닫힘
+    	 			 $(".modal").hide();    	
+    	 		});	
+    	 		$(".modal").click(function(e){   //모달창 이미지 밖에 부분 클릭시 창 닫힘.
+    	 			if(e.target.className != "modal"){
+    	 				return false;  // .modalBox 클릭시 창 안닫힘
+    	 			}else{
+    	 				$(".modal").hide();   //.modal 영역 클릭시 창 닫힘
+    	 			}
+    	 			
+    	 		});
+    	 		
+    	 			
            		 
     	 });	 
     	
