@@ -16,7 +16,96 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
+  		<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     </head>
+ <style>
+ /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal button {
+	position: absolute;
+	top: 3rem;
+	right: 3rem;
+	background: transparent;
+	border: 0;
+	color: #ffffff;
+	font-size: 3rem;
+}
+
+.modalBox {
+	position: relative;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -20%);
+	background-color: #ffffff;
+	width: 40%;
+	height: 40%;
+	text-align: center;
+}
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+}
+#modify-writebox {
+    background-color: white;
+    margin : 10px;
+}
+
+#profileInfo {
+    padding : 3px 10px 10px 10px;
+    min-height : 50px;
+}
+#btn-write-modify { 
+    color : #009f47;
+    background-color: #e0f8eb;
+}
+.register-box > .btn
+ {
+    font-size:10pt;
+    text-decoration: none;
+    padding-bottom : 3px;
+    padding-top : 3px;
+    border-radius: 5px;
+    float : right;
+}
+#profileImg {
+ text-align :center;
+}
+#imgProfile{
+	
+	width : 250px;
+	height : 250px; 
+	border-radius: 70%;
+}
+.profile{
+ text-decoration: none;
+}
+.close{
+	position: absolute;
+	top: 3rem;
+	right: 3rem;
+	background: transparent;
+	border: 0;
+	color: #ffffff;
+	font-size: 3rem;
+}
+ </style>
     <body class="d-flex flex-column h-100">
     <!--  세션을 이용한 로그인 처리 -->
         <main class="flex-shrink-0">
@@ -53,7 +142,7 @@
                                	 	<p class="lead fw-normal text-white-50 mb-4">두부의 공간에 오신것을 환영합니다.</p>
                                  </c:if>
                                  <c:if test="${id != null}">
-                                 	<p class="lead fw-normal text-white-50 mb-4">${id}님 두부의 공간에 오신것을 환영합니다.</p>
+                                 	<p class="lead fw-normal text-white-50 mb-4"><a class="profile">${id}</a>님 두부의 공간에 오신것을 환영합니다.</p>
                                  </c:if>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                                     <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
@@ -143,6 +232,32 @@
                     </div>
                 </div>
             </div>
+         <!-- profile 모달창 -->   
+        <div id="modalWin" class="modal">
+       		<button class="close">&times;</button>
+       			 <!-- Modal content -->
+        	<div class="modal-content">
+           	 	<div class="imgBox">
+	           	 	<h2>My Profile</h2>
+	           	 	<div id="profileImg">
+						<img id="imgProfile" src="/img/8.jpg"/>	           	 	 	
+	           	 	</div>
+           	 	</div>
+            		<div id="modify-writebox">
+              			 <div class="commenter commenter-writebox"></div>
+               			 <div class="modify-writebox-content">
+                		</div>  
+                		<hr/>
+	                	<div id="ProfileInfo">
+	                	  아이디 : 12341242353456346455634534 <br/>
+	                	  이메일 : test@test.com
+	                	</div>
+           			</div>
+           			<div class="register-box">
+	                       <a class="btn" id="btn-write-modify"onclick="location.href='/updateProfilePhoto'">프로필 사진 변경</a>
+	                </div>
+        	</div>
+     </div><!--modalWin  -->
         </main>
         <!-- Footer-->
         <footer class="bg-dark py-4 mt-auto">
@@ -163,5 +278,26 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>
+        <script>
+        $(".profile").click(function(){
+ 			
+ 			$(".modal").show();
+        });
+        
+    	$(".modal button").click(function(){   // X버튼 클릭시 모달창 닫힘
+			 $(".modal").hide();    	
+		});	
+    	
+    	$(".modal").click(function(e){   //모달창 이미지 밖에 부분 클릭시 창 닫힘.
+ 			if(e.target.className != "modal"){
+ 				return false;  // .modalBox 클릭시 창 안닫힘
+ 			}else{
+ 				$(".modal").hide();   //.modal 영역 클릭시 창 닫힘
+ 			}
+ 			
+ 		});
+        
+        </script>
+        
     </body>
 </html>
