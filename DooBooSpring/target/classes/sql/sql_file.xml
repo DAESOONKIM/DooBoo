@@ -1,0 +1,7 @@
+<!--  
+
+ create Table ProfilePhoto(
+    userId varchar2(100) not null unique,
+    profilePhoto varchar2(500)
+ );
+ -->
