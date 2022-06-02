@@ -28,14 +28,22 @@
  margin : auto;
  width : 300px;
  height : 300px;
- border-radius: 70%;
  margin-top : 200px;
 }
 .imgBox > img{ 
 	border-radius: 70%;
+	width : 100%;
+ 	height : 100%;
 }
 #transferForm{
- margin-left : 40%;
+ margin-left : 41%;
+}
+form{
+	float : left;
+}
+#dtlBtn{
+	margin-left : 10%;
+	margin-top : 7%;
 }
 </style>    
 <body>
@@ -55,20 +63,28 @@
 					<li class="nav-item"><a class="nav-link" href="/photo/photo">Photo</a></li>
 					<li class="nav-item"><a class="nav-link" href="/board/list">FreeBoard</a></li>
 					<li class="nav-item"><a class="nav-link" href="/mail">Contact</a></li>
-					<li class="nav-item"><a class="nav-link" href="/login/login">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="/login/logout">LogOut</a></li>
 					<li class="nav-item"><a class="nav-link" href="/login/profile">My Profile</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<div class="imgBox">
+	<c:if test="${profilePhoto == null}">
 		<img src="/img/noProfile.jpg"/>
+	</c:if>
+	<c:if test="${profilePhoto != null}">
+		<img src="/img/${profilePhoto}"/>
+	</c:if>
 	</div>
 	<br><hr><br>
 	<div class="form-floating mb-3" id="transferForm">
-	<form action="upload" method="post" enctype="multipart/form-data">
-		파일 선택 : <input type="file" name="profilePhoto">
-		<input type="submit" value="전송">
+	<form action="/updateProfilePhoto" method="post" enctype="multipart/form-data">
+		<input class="btn btn-primary btn-sm" type="file" name="profilePhoto">
+		<input class="btn btn-outline-primary btn-sm" type="submit" value="사진 변경">
+	</form>
+	<form action="/deleteProfilePhoto" method="post">
+		<input class="btn btn-outline-primary btn-sm" id="dtlBtn" type="submit" value="삭제">
 	</form>
 	</div>
 <!-- Footer-->
