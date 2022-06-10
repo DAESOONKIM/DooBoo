@@ -22,6 +22,7 @@ import com.spring.dooboo.domain.PageHandler;
 import com.spring.dooboo.domain.SearchCondition;
 import com.spring.dooboo.service.DB_BoardService;
 import com.spring.dooboo.service.DB_Board_CommentService;
+import com.spring.dooboo.service.ProfilePhotoService;
 
 
 @Controller
@@ -34,11 +35,25 @@ public class DB_BoardController {
 	DB_MemberDAO mdao;
 	@Autowired
 	DB_Board_CommentService comment_Service;
+	@Autowired
+	ProfilePhotoService profile_Service;
 	
 	@GetMapping("/home")
-	public String goHome() {
+	public String goHome(Model m, HttpSession session) {
+		String id = (String)session.getAttribute("id");
 		
+		DB_MemberDTO member = new DB_MemberDTO();
+		try {
+			
+			member = mdao.LoginMember(id);
+			m.addAttribute("member", member);
+			
+			String profilePhoto = profile_Service.rtrvPhotoName(id);
+			m.addAttribute("profilePhoto",profilePhoto);
 		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "main";
 	}
 	@PostMapping("/delete")

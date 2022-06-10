@@ -15,6 +15,6 @@
 	    <typeAlias alias="DB_Board_CommentDTO" type="com.spring.dooboo.domain.DB_Board_CommentDTO"/>
 	    <typeAlias alias="DB_RecDTO" type="com.spring.dooboo.domain.DB_RecDTO"/>
 	    <typeAlias alias="DB_PhotoJoinRecDTO" type="com.spring.dooboo.domain.DB_PhotoJoinRecDTO"/>
-	    
+	    <typeAlias alias="ProfilePhotoDTO" type="com.spring.dooboo.domain.ProfilePhotoDTO"/>
 	</typeAliases>
 </configuration>

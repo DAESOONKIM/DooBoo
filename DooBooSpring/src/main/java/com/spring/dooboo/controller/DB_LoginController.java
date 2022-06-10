@@ -219,7 +219,7 @@ public class DB_LoginController {
             response.addCookie(cookie);
         }
 //		       3. 홈으로 이동
-        toURL = toURL==null || toURL.equals("") ? "/" : toURL;
+        toURL = toURL==null || toURL.equals("") ? "/board/home" : toURL;
         return "redirect:"+toURL;
 	
 	
