@@ -95,6 +95,7 @@
 }
 .profile{
  text-decoration: none;
+ cursor:pointer;
 }
 .close{
 	position: absolute;
@@ -112,7 +113,7 @@
             <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container px-5">        
-                    <a class="navbar-brand" href="/">두부의 공간</a>
+                    <a class="navbar-brand" href="/board/home">두부의 공간</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -240,7 +241,7 @@
            	 	<div class="imgBox">
 	           	 	<h2>My Profile</h2>
 	           	 	<div id="profileImg">
-						<img id="imgProfile" src="/img/8.jpg"/>	           	 	 	
+						<img id="imgProfile" src="/img/${profilePhoto}"/>	           	 	 	
 	           	 	</div>
            	 	</div>
             		<div id="modify-writebox">
@@ -249,8 +250,8 @@
                 		</div>  
                 		<hr/>
 	                	<div id="ProfileInfo">
-	                	  아이디 : 12341242353456346455634534 <br/>
-	                	  이메일 : test@test.com
+	                	  아이디 : ${member.id} <br/>
+	                	  이메일 : ${member.email}
 	                	</div>
            			</div>
            			<div class="register-box">

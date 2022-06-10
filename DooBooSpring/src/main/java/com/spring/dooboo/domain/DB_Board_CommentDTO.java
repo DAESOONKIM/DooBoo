@@ -11,6 +11,8 @@ public class DB_Board_CommentDTO {
 	private String commenter;
 	private String reg_date;
 	private String up_date;
+	//프로필포토 컬럼
+	private String profilephoto;
 	
 	public DB_Board_CommentDTO() {}
 	
@@ -75,6 +77,14 @@ public class DB_Board_CommentDTO {
 
 	public void setUp_date(String up_date) {
 		this.up_date = up_date;
+	}
+
+	public String getProfilephoto() {
+		return profilephoto;
+	}
+
+	public void setProfilephoto(String profilephoto) {
+		this.profilephoto = profilephoto;
 	}
 
 	@Override

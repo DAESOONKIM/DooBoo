@@ -74,8 +74,12 @@
 }
 
 .comment-img {
-    font-size:36px;
     position: absolute;
+}
+.comment-img > img {
+    width : 30px;
+    height : 30px;
+    border-radius: 70%;
 }
 
 .comment-item {
@@ -255,7 +259,7 @@ textarea {
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container px-5">
-			<a class="navbar-brand" href="/">두부의 공간</a>
+			<a class="navbar-brand" href="/board/home">두부의 공간</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -513,8 +517,12 @@ textarea {
 				tmp += ' data-pcno=' + comment.pcno
 				tmp += ' data-bno='+comment.bno +'>'
 				if(comment.pcno == comment.cno ){
-					tmp += '<span class="comment-img">' 
-					tmp += '<i class="bi bi-emoji-smile" aria-hidden="true"></i></span>'
+					tmp += '<div class="comment-img">' 
+						if(comment.profilephoto == null){
+							tmp += '<img src="/img/noProfile.jpg"/></div>'
+						}else{
+							tmp += '<img src="/img/' + comment.profilephoto +'"/></div>'
+						}
 					tmp += '<div class="comment-area">'
 					tmp += '<div class="commenter">'+comment.commenter+'</div>'
 					tmp += '<div class="comment-content">'+comment.co_mment+'</div>'

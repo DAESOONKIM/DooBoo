@@ -32,7 +32,7 @@ if(msg=="PASS_ERR")  alert("패스워드가 다릅니다 확인해주세요.");
 <!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container px-5">
-			<a class="navbar-brand" href="/">두부의 공간</a>
+			<a class="navbar-brand" href="/board/home">두부의 공간</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
