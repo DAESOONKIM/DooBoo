@@ -45,7 +45,7 @@
 					FROM DB_COMMENT
 					WHERE bno = #{bno}
 					ORDER BY pcno ASC, cno ASC)A
-			 )	
+			 )B FULL OUTER JOIN PROFILEPHOTO C on B.commenter = C.userid	
 		WHERE  Rnum between #{startRow} and #{endRow} 	
 </select>
 <delete id="delete" parameterType="map"> 
